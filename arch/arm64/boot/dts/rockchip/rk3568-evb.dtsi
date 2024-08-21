@@ -1815,7 +1815,7 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &rknpu {
-	rknpu-supply = <<&vdd_fixed>;
+	rknpu-supply = <&vdd_fixed>;
 	status = "okay";
 };
 
