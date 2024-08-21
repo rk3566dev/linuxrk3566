@@ -282,7 +282,7 @@
 		compatible = "rockchip,multicodecs-card";
 		rockchip,card-name = "rockchip,rk3568-vad";
 /*		rockchip,cpu = <&i2s1_8ch>;*/
-		rockchip,codec = <&rk809_codec>, <&vad>;
+		rockchip,codec = <&vad>;
 	};
 
 vcc3v3_sys: vcc3v3-sys {
@@ -1815,7 +1815,7 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &rknpu {
-	rknpu-supply = <&vdd_npu>;
+	rknpu-supply = <<&vdd_fixed>;
 	status = "okay";
 };
 
