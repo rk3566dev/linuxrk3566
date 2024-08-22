@@ -1845,12 +1845,15 @@ vcc5v0_host: vcc5v0-host {
 
 &sdmmc0 {
     max-frequency = <150000000>;
+   no-sdio;
+   no-mmc;
     supports-sd;
     bus-width = <4>;
     cap-mmc-highspeed;
     cap-sd-highspeed;
+
     disable-wp;
-    sd-uhs-sdr104;
+  //  sd-uhs-sdr104;
     vmmc-supply = <&vcc3v3_sd>;
     vqmmc-supply = <&vccio_sd>;
     pinctrl-names = "default";
