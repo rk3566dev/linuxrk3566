@@ -1531,8 +1531,8 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &i2c1 {
-	status = "okay";
-
+	status = "disabled";
+/*
 	gt1x: gt1x@14 {
 		compatible = "goodix,gt1x";
 		reg = <0x14>;
@@ -1540,12 +1540,12 @@ vcc5v0_host: vcc5v0-host {
 		pinctrl-0 = <&touch_gpio>;
 		goodix,rst-gpio = <&gpio0 RK_PB6 GPIO_ACTIVE_HIGH>;
 		goodix,irq-gpio = <&gpio0 RK_PB5 IRQ_TYPE_LEVEL_LOW>;
-	};
+	};*/
 };
 
 &i2c5 {
-	status = "okay";
-
+	status = "disabled";
+/*
 	mxc6655xa: mxc6655xa@15 {
 		status = "okay";
 		compatible = "gs_mxc6655xa";
@@ -1558,7 +1558,7 @@ vcc5v0_host: vcc5v0-host {
 		type = <SENSOR_TYPE_ACCEL>;
 		power-off-in-suspend = <1>;
 		layout = <1>;
-	};
+	};*/
 };
 
 &i2s0_8ch {
