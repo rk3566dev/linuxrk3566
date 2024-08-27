@@ -1362,50 +1362,107 @@
 		};
 	};
 
-	gpu_opp_table: opp-table2 {
-		compatible = "operating-points-v2";
 
-		mbist-vmin = <825000 900000 950000>;
-		nvmem-cells = <&gpu_leakage>, <&core_pvtm>, <&mbist_vmin>, <&gpu_opp_info>,
-			      <&specification_serial_number>, <&remark_spec_serial_number>;
-		nvmem-cell-names = "leakage", "pvtm", "mbist-vmin", "opp-info",
-				   "specification_serial_number", "remark_spec_serial_number";
-		rockchip,supported-hw;
-		rockchip,max-volt = <1000000>;
-		rockchip,temp-hysteresis = <5000>;
-		rockchip,low-temp = <0>;
-		rockchip,low-temp-adjust-volt = <
+gpu_opp_table: opp-table2 {
+        compatible = "operating-points-v2";
+
+        mbist-vmin = <825000 900000 950000>;
+        nvmem-cells = <&gpu_leakage>, <&core_pvtm>, <&mbist_vmin>;
+        nvmem-cell-names = "leakage", "pvtm", "mbist-vmin";
+        rockchip,pvtm-voltage-sel = <
+            0        84000   0
+            84001    91000   1
+            91001    100000  2
+        >;
+        rockchip,pvtm-ch = <0 5>;
+
+        opp-200000000 {
+            opp-hz = /bits/ 64 <200000000>;
+            opp-microvolt = <850000>;
+            opp-microvolt-L0 = <850000>;
+            opp-microvolt-L1 = <825000>;
+            opp-microvolt-L2 = <825000>;
+        };
+        opp-300000000 {
+            opp-hz = /bits/ 64 <300000000>;
+            opp-microvolt = <850000>;
+            opp-microvolt-L0 = <850000>;
+            opp-microvolt-L1 = <825000>;
+            opp-microvolt-L2 = <825000>;
+        };
+        opp-400000000 {
+            opp-hz = /bits/ 64 <400000000>;
+            opp-microvolt = <850000>;
+            opp-microvolt-L0 = <850000>;
+            opp-microvolt-L1 = <825000>;
+            opp-microvolt-L2 = <825000>;
+        };
+  opp-600000000 {
+            opp-hz = /bits/ 64 <600000000>;
+            opp-microvolt = <875000>;
+            opp-microvolt-L0 = <875000>;
+            opp-microvolt-L1 = <825000>;
+            opp-microvolt-L2 = <825000>;
+        };
+        opp-700000000 {
+            opp-hz = /bits/ 64 <700000000>;
+            opp-microvolt = <950000>;
+            opp-microvolt-L0 = <950000>;
+            opp-microvolt-L1 = <900000>;
+            opp-microvolt-L2 = <850000>;
+        };
+        opp-800000000 {
+            opp-hz = /bits/ 64 <800000000>;
+            opp-microvolt = <1000000>;
+            opp-microvolt-L0 = <1000000>;
+            opp-microvolt-L1 = <950000>;
+            opp-microvolt-L2 = <900000>;
+        };
+};
+//	gpu_opp_table: opp-table2 {
+//		compatible = "operating-points-v2";
+//
+//		mbist-vmin = <825000 900000 950000>;
+//		nvmem-cells = <&gpu_leakage>, <&core_pvtm>, <&mbist_vmin>, <&gpu_opp_info>,
+//			      <&specification_serial_number>, <&remark_spec_serial_number>;
+//		nvmem-cell-names = "leakage", "pvtm", "mbist-vmin", "opp-info",
+//				   "specification_serial_number", "remark_spec_serial_number";
+//		rockchip,supported-hw;
+//		rockchip,max-volt = <1000000>;
+//		rockchip,temp-hysteresis = <5000>;
+//		rockchip,low-temp = <0>;
+//		rockchip,low-temp-adjust-volt = <
 			/* MHz    MHz    uV */
-			   0      800    50000
-		>;
-		rockchip,pvtm-voltage-sel = <
-			0        84000   0
-			84001    87000   1
-			87001    91000   2
-			91001    100000  3
-		>;
-		rockchip,pvtm-ch = <0 5>;
+//			   0      800    50000
+//		>;
+//		rockchip,pvtm-voltage-sel = <
+//			0        84000   0
+//			84001    87000   1
+//			87001    91000   2
+//			91001    100000  3
+//		>;
+//		rockchip,pvtm-ch = <0 5>;
 
 		/* RK3568 && RK3568M gpu OPPs */
-		opp-200000000 {
+//		opp-200000000 {
 			//opp-supported-hw = <0xfb 0xffff>;
-			opp-hz = /bits/ 64 <200000000>;
-			opp-microvolt = <850000 850000 1000000>;
-		};
-		opp-300000000 {
+//			opp-hz = /bits/ 64 <200000000>;
+//			opp-microvolt = <850000 850000 1000000>;
+//		};
+//		opp-300000000 {
 			//opp-supported-hw = <0xfb 0xffff>;
-			opp-hz = /bits/ 64 <300000000>;
-			opp-microvolt = <850000 850000 1000000>;
-		};
-		opp-400000000 {
+//			opp-hz = /bits/ 64 <300000000>;
+//			opp-microvolt = <850000 850000 1000000>;
+//		};
+//		opp-400000000 {
 			//opp-supported-hw = <0xfb 0xffff>;
-			opp-hz = /bits/ 64 <400000000>;
-			opp-microvolt = <850000 850000 1000000>;
-		};
-		opp-600000000 {
+//			opp-hz = /bits/ 64 <400000000>;
+//			opp-microvolt = <850000 850000 1000000>;
+//		};
+//		opp-600000000 {
 			//opp-supported-hw = <0xfb 0xffff>;
-			opp-hz = /bits/ 64 <600000000>;
-			opp-microvolt = <900000 900000 1000000>;
+//			opp-hz = /bits/ 64 <600000000>;
+/*			opp-microvolt = <900000 900000 1000000>;
 			opp-microvolt-L0 = <900000 900000 1000000>;
 			opp-microvolt-L1 = <875000 875000 1000000>;
 			opp-microvolt-L2 = <850000 850000 1000000>;
@@ -1428,23 +1485,23 @@
 			opp-microvolt-L1 = <975000 975000 1000000>;
 			opp-microvolt-L2 = <950000 950000 1000000>;
 			opp-microvolt-L3 = <925000 925000 1000000>;
-		};
+		};*/
 
 		/* RK3568J gpu OPPs */
-		opp-j-600000000 {
-			opp-supported-hw = <0x04 0xffff>;
-			opp-hz = /bits/ 64 <600000000>;
-			opp-microvolt = <900000 900000 1000000>;
-		};
+//		opp-j-600000000 {
+//			opp-supported-hw = <0x04 0xffff>;
+//			opp-hz = /bits/ 64 <600000000>;
+//			opp-microvolt = <900000 900000 1000000>;
+//		};
 
 		/* RK3568M gpu OPPs */
-		opp-m-800000000 {
-			opp-supported-hw = <0x02 0xffff>;
-			opp-hz = /bits/ 64 <800000000>;
-			opp-microvolt = <950000 950000 1000000>;
-		};
-
-	};
+//		opp-m-800000000 {
+//			opp-supported-hw = <0x02 0xffff>;
+//			opp-hz = /bits/ 64 <800000000>;
+//			opp-microvolt = <950000 950000 1000000>;
+//		};
+//
+//	};
 
 	pvtm@fde80000 {
 		compatible = "rockchip,rk3568-gpu-pvtm";
