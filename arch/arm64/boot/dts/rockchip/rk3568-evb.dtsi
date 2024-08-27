@@ -430,15 +430,15 @@ vcc5v0_host: vcc5v0-host {
     vdd_gpu: vdd-gpu {
         compatible = "regulator-fixed";
         regulator-name = "vdd_gpu";
-        regulator-min-microvolt = <500000>;
+        regulator-min-microvolt = <950000>;
         regulator-max-microvolt = <950000>;
         regulator-init-microvolt = <900000>;
         regulator-always-on;
         regulator-boot-on;
         vin-supply = <&vcc5v0_sys>;
-	regulator-state-mem {
-         regulator-off-in-suspend;
-        };
+	//regulator-state-mem {
+        // regulator-off-in-suspend;
+       // };
 
     };
     vdd_cpu: vdd-cpu {
