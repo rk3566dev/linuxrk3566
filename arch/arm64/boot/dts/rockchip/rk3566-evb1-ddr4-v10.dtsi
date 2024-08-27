@@ -128,7 +128,7 @@ vcc2v5_sys: vcc2v5-ddr {
          status = "okay";
      };
 
-}
+};
 
 &gmac1 {
     phy-mode = "rgmii";
