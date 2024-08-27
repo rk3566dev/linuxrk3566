@@ -108,9 +108,27 @@ vcc2v5_sys: vcc2v5-ddr {
 	status = "okay";
 };
 
+
 &csi2_dphy_hw {
 	status = "okay";
 };
+
+&i2c3 {
+
+     status = "okay";
+     pinctrl-names = "default";
+      pinctrl-0 = <&i2c3m1_xfer>;
+       hym8563: hym8563@51 {
+         compatible = "haoyu,hym8563";
+          reg = <0x51>;
+          #clock-cells = <0>;
+         clock-frequency = <32768>;
+          clock-output-names = "hym8563";
+         /* rtc_int is not connected */
+         status = "okay";
+     };
+
+}
 
 &gmac1 {
     phy-mode = "rgmii";

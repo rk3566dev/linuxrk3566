@@ -473,7 +473,7 @@ vcc5v0_host: vcc5v0-host {
 	sdio_pwrseq: sdio-pwrseq {
 		compatible = "mmc-pwrseq-simple";
 //		clocks = <&rk809 1>;
-		 clocks = <&pmucru CLK_RTC_32K>;
+		 clocks = <&hym8563>;
 		clock-names = "ext_clock";
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_enable_h>;
@@ -488,7 +488,7 @@ vcc5v0_host: vcc5v0-host {
 		reset-gpios = <&gpio2 RK_PB1 GPIO_ACTIVE_LOW>;
 	};
 
-	  wireless_wlan: wireless-wlan {
+    wireless_wlan: wireless-wlan {
         compatible = "wlan-platdata";
         rockchip,grf = <&grf>;
         wifi_chip_type = "ap6398s";
@@ -501,7 +501,8 @@ vcc5v0_host: vcc5v0-host {
     wireless_bluetooth: wireless-bluetooth {
         compatible = "bluetooth-platdata";
     //  clocks = <&rk809 1>;
-        clocks = <&pmucru CLK_RTC_32K>;
+    //    clocks = <&pmucru CLK_RTC_32K>;
+        clocks = <hym8563>;
         clock-names = "ext_clock";
         //wifi-bt-power-toggle;
         uart_rts_gpios = <&gpio2 RK_PB5 GPIO_ACTIVE_LOW>;
