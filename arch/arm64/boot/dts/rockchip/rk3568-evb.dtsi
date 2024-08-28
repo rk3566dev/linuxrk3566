@@ -427,7 +427,7 @@ vcc5v0_host: vcc5v0-host {
         vin-supply = <&vcc5v0_sys>;
     };
 
-    vdd_gpu: vdd-gpu {
+   /* vdd_gpu: vdd-gpu {
         compatible = "regulator-fixed";
         regulator-name = "vdd_gpu";
         regulator-min-microvolt = <950000>;
@@ -440,7 +440,7 @@ vcc5v0_host: vcc5v0-host {
         // regulator-off-in-suspend;
        // };
 
-    };
+    };*/
     vdd_cpu: vdd-cpu {
         compatible = "pwm-regulator";
         pwms = <&pwm0 0 5000 1>;
@@ -1232,7 +1232,7 @@ vcc5v0_host: vcc5v0-host {
 };*/
 
 &gpu {
-	mali-supply = <&vdd_gpu>;
+	mali-supply = <&vdd_logic>;
 	status = "okay";
 };
 
