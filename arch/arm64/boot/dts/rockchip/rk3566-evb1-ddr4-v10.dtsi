@@ -56,6 +56,19 @@ vcc2v5_sys: vcc2v5-ddr {
          vin-supply = <&vcc3v3_sys>;
     };
 
+   fd655_dev{
+        compatible = "rockchip,fd655_dev";
+        clk_pin = <&gpio4 RK_PB5 GPIO_ACTIVE_HIGH>;
+        dat_pin = <&gpio4 RK_PB4 GPIO_ACTIVE_HIGH>;
+        //usb4g_power_pin = <&gpio0 RK_PA2 GPIO_ACTIVE_HIGH>;
+        //usb4g_pwrkey_pin= <&gpio0 RK_PD5 GPIO_ACTIVE_HIGH>;
+        //sata_pwr_en = <&gpio4 RK_PC3 GPIO_ACTIVE_HIGH>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&fd655_clk_pin &fd655_dat_pin>;
+
+        status = "okay";
+    };
+
   cs4344_sound: cs4344-sound {
         compatible = "simple-audio-card";
         simple-audio-card,format = "i2s";
@@ -601,13 +614,13 @@ vcc2v5_sys: vcc2v5-ddr {
         };
     };
 
-//    fd655_dev {
-  //      fd655_clk_pin: fd655-clk_pin {
-    //        rockchip,pins = <1 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
-      //  };
-      //  fd655_dat_pin: fd655-dat_pin {
-        //    rockchip,pins = <1 RK_PA0 RK_FUNC_GPIO &pcfg_pull_none>;
-      //  };
-   // };
+    fd655_dev {
+        fd655_clk_pin: fd655-clk_pin {
+            rockchip,pins = <4 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
+     };
+        fd655_dat_pin: fd655-dat_pin {
+            rockchip,pins = <4 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
+       };
+   };
 
 };

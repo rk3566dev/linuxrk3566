@@ -1,0 +1,14 @@
+#
+# Input core configuration
+#
+
+
+
+config RK_FD655
+	tristate "Rockchip fd655 device surport"
+	default n
+	help
+	  Say Y here if you want to use the FD655.
+
+
+
