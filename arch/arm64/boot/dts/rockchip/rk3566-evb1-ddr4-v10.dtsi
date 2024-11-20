@@ -128,7 +128,7 @@ vcc2v5_sys: vcc2v5-ddr {
 
 &i2c3 {
 
-     status = "okay";
+     status = "disabled";
      pinctrl-names = "default";
       pinctrl-0 = <&i2c3m1_xfer>;
        hym8563: hym8563@51 {
@@ -138,11 +138,12 @@ vcc2v5_sys: vcc2v5-ddr {
          clock-frequency = <32768>;
           clock-output-names = "hym8563";
          /* rtc_int is not connected */
-         status = "okay";
+         status = "disabled";
      };
 
 };
 
+/*jack
 &gmac1 {
     phy-mode = "rgmii";
     clock_in_out = "output";
@@ -159,24 +160,64 @@ vcc2v5_sys: vcc2v5-ddr {
         &gmac1m1_rgmii_clk
         &gmac1m1_rgmii_bus
         &eth1m1_pins
-        &gmac1m1_clkinout>;
+        &gmac1m1_clkinout>;jack*/
+
 /*  tx_delay = <0x4b>;
     rx_delay = <0x2b>;*/
 /*  tx_delay = <0x41>;
     rx_delay = <0x2d>;*/
-    tx_delay = <0x4b>;
+
+/*jack    tx_delay = <0x4b>;
     rx_delay = <0x2b>;
     phy-handle = <&rgmii_phy1>;
     status = "okay";
-};
+};jack */
 
+/*
 &mdio1 {
     rgmii_phy1: phy@0 {
         compatible = "ethernet-phy-ieee802.3-c22";
         reg = <0x0>;
         clocks = <&cru CLK_MAC1_OUT>;
     };
+};*/
+
+&gmac1 {
+  phy-mode = "rmii";
+  clock_in_out = "output";
+  snps,reset-gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
+  snps,reset-active-low;
+  /* Reset time is 20ms, 100ms for rtl8211f */
+  snps,reset-delays-us = <0 20000 100000>;
+/*  assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
+  assigned-clock-parents = <&cru SCLK_GMAC1_RMII_SPEED>;*/
+  assigned-clocks = <&cru SCLK_GMAC1_RX_TX>,<&cru SCLK_GMAC1>,<&cru CLK_MAC1_OUT>;
+  assigned-clock-parents = <&cru SCLK_GMAC1_RMII_SPEED>;
+  assigned-clock-rates = <0>, <50000000>,<25000000>;
+/*  assigned-clock-rates = <0>,<50000000>, <50000000>;*/
+/*  clocks = <&cru CLK_MAC1_OUT>;*/
+  pinctrl-names = "default";
+  pinctrl-0 = <&gmac1m1_miim
+       &gmac1m1_tx_bus2
+       &gmac1m1_rx_bus2
+       &eth1m1_pins
+       &gmac1m1_clkinout>;
+
+/*  tx_delay = <0x41>;
+  rx_delay = <0x2d>*/
+  phy-handle = <&rmii_phy1>;
+  status = "okay";
+ };
+
+
+&mdio1 {
+    rmii_phy1: phy@0 {
+        compatible = "ethernet-phy-ieee802.3-c22";
+        reg = <0x0>;
+        clocks = <&cru CLK_MAC1_OUT>;
+    };
 };
+
 
 //&csi2_dphy1 {
 //	status = "okay";
