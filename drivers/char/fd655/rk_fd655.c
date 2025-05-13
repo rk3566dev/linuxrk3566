@@ -451,7 +451,7 @@ void fd655_bit4onoff(int a){
 	FD655_Disp(DIG5,val,pdata);
 }
 
-void fd656_bit5onoff(int a){
+void fd655_bit5onoff(int a){
 	FD655_Command(FD655SYSON,pdata);
 	if(a==1){
 		val |=(1<<5);
@@ -460,7 +460,7 @@ void fd656_bit5onoff(int a){
 	}
 	FD655_Disp(DIG5,val,pdata);
 }
-void fd656_bit6onoff(int a){
+void fd655_bit6onoff(int a){
 	FD655_Command(FD655SYSON,pdata);
 	if(a==1){
 		val |=(1<<6);
