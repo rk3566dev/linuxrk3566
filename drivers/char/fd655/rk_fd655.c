@@ -399,9 +399,36 @@ static ssize_t store_fd655_poweroff(struct class *cls,struct class_attribute *at
                return count;
 }
 
+void fd655_bit5onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	  if(a==0){
+		  FD655_Disp(DIG5,0x00,pdata);
+	  }
+
+       if(a==1){
+	       FD655_Disp(DIG5,0x20,pdata);
+	 }
+}
+
+static ssize_t store_fd655_bt5(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int val=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &val))
+                       return -EINVAL;
+                       reg = (char)val;
+				if(reg ==1){
+					fd655_bit5onoff(1);
+				}
+				if(reg==0){
+					fd655_bit5onoff(0);
+				}
+				 return count;
+}
 
 static struct class_attribute fd65_class_attrs[] = {
         __ATTR(fd655, 0644,  NULL, store_fd655_poweroff),
+	__ATTR(bt5, 0644,  NULL, store_fd655_bt5),
 };
 
 static void create_fd655_attrs(void) {
