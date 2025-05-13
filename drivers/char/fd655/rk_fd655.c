@@ -55,6 +55,7 @@ static int usb4g_pwrkey_pin = 0;
 static int sata_pwr_en = 0;
 static FD655_DEV *pdata = NULL;
 
+unsigned char  val = 0x00;
 /** 
  * @brief   转换字符为数码管的显示码
  * @param   cTemp 待转换为显示码的字符
@@ -399,26 +400,166 @@ static ssize_t store_fd655_poweroff(struct class *cls,struct class_attribute *at
                return count;
 }
 
-void fd655_bit5onoff(int a){
-	FD655_Command(FD655SYSON,pdata);
-	  if(a==0){
-		  FD655_Disp(DIG5,0x00,pdata);
-	  }
 
-       if(a==1){
-	       FD655_Disp(DIG5,0x20,pdata);
-	 }
+void fd655_bit0onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<0);
+	}else {
+		val &=~(1<<0);
+	}
+	FD655_Disp(DIG5,val,pdata);
+}
+void fd655_bit1onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<1);
+	}else {
+		val &=~(1<<1);
+	}
+	FD655_Disp(DIG5,val,pdata);
+}
+
+void fd655_bit2onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<2);
+	}else {
+		val &=~(1<<2);
+	}
+	FD655_Disp(DIG5,val,pdata);
+}
+
+void fd655_bit3onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<3);
+	}else {
+		val &=~(1<<3);
+	}
+	FD655_Disp(DIG5,val,pdata);
+	
+}
+
+void fd655_bit4onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<4);
+	}else {
+		val &=~(1<<4);
+	}
+	FD655_Disp(DIG5,val,pdata);
+}
+
+void fd656_bit5onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<5);
+	}else {
+		val &=~(1<<5);
+	}
+	FD655_Disp(DIG5,val,pdata);
+}
+void fd656_bit6onoff(int a){
+	FD655_Command(FD655SYSON,pdata);
+	if(a==1){
+		val |=(1<<6);
+	}else {
+		val &=~(1<<6);
+	}
+	FD655_Disp(DIG5,val,pdata);
+}
+
+
+static ssize_t store_fd655_bt0(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int v=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &v))
+                       return -EINVAL;
+                       reg = (char)v;
+				if(reg ==1){
+				fd655_bit0onoff(1);
+				}
+				if(reg==0){
+					fd655_bit0onoff(0);
+				}
+				 return count;
+}
+
+static ssize_t store_fd655_bt1(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int v=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &v))
+                       return -EINVAL;
+                       reg = (char)v;
+				if(reg ==1){
+				fd655_bit1onoff(1);
+				}
+				if(reg==0){
+					fd655_bit1onoff(0);
+				}
+				 return count;
+}
+
+static ssize_t store_fd655_bt2(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int v=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &v))
+                       return -EINVAL;
+                       reg = (char)v;
+				if(reg ==1){
+				fd655_bit2onoff(1);
+				}
+				if(reg==0){
+					fd655_bit2onoff(0);
+				}
+				 return count;
+}
+
+static ssize_t store_fd655_bt3(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int v=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &v))
+                       return -EINVAL;
+                       reg = (char)v;
+				if(reg ==1){
+				fd655_bit3onoff(1);
+				}
+				if(reg==0){
+					fd655_bit3onoff(0);
+				}
+				 return count;
+}
+
+static ssize_t store_fd655_bt4(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int v=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &v))
+                       return -EINVAL;
+                       reg = (char)v;
+				if(reg ==1){
+				fd655_bit4onoff(1);
+				}
+				if(reg==0){
+					fd655_bit4onoff(0);
+				}
+				 return count;
 }
 
 static ssize_t store_fd655_bt5(struct class *cls,struct class_attribute *attr,
                const char *buf, size_t count){
-				   int val=0;
+				   int v=0;
 				   char reg;
-               if (kstrtoint(buf, 0, &val))
+               if (kstrtoint(buf, 0, &v))
                        return -EINVAL;
-                       reg = (char)val;
+                       reg = (char)v;
 				if(reg ==1){
-					fd655_bit5onoff(1);
+				fd655_bit5onoff(1);
 				}
 				if(reg==0){
 					fd655_bit5onoff(0);
@@ -426,9 +567,34 @@ static ssize_t store_fd655_bt5(struct class *cls,struct class_attribute *attr,
 				 return count;
 }
 
+
+static ssize_t store_fd655_bt6(struct class *cls,struct class_attribute *attr,
+               const char *buf, size_t count){
+				   int v=0;
+				   char reg;
+               if (kstrtoint(buf, 0, &v))
+                       return -EINVAL;
+                       reg = (char)v;
+				if(reg ==1){
+					fd655_bit6onoff(1);
+				}
+				if(reg==0){
+					fd655_bit6onoff(0);
+				}
+				 return count;
+}
+
+
+
 static struct class_attribute fd65_class_attrs[] = {
-        __ATTR(fd655, 0644,  NULL, store_fd655_poweroff),
-	__ATTR(bt5, 0644,  NULL, store_fd655_bt5),
+        __ATTR(fd655,0644,  NULL, store_fd655_poweroff),
+		 __ATTR(bt0, 0644,  NULL, store_fd655_bt0),
+		 __ATTR(bt1, 0644,  NULL, store_fd655_bt1),
+		 __ATTR(bt2, 0644,  NULL, store_fd655_bt2),
+		 __ATTR(bt3, 0644,  NULL, store_fd655_bt3),
+		 __ATTR(bt4, 0644,  NULL, store_fd655_bt4),
+	     __ATTR(bt5, 0644,  NULL, store_fd655_bt5),
+		 __ATTR(bt6, 0644,  NULL, store_fd655_bt6),
 };
 
 static void create_fd655_attrs(void) {
