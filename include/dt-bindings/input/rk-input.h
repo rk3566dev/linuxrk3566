@@ -230,7 +230,8 @@
 #define KEY_REFRESH		173	/* AC Refresh */
 #define KEY_EXIT		174	/* AC Exit */
 #define KEY_MOVE		175
-#define KEY_EDIT		176
+/*#define KEY_EDIT		176*/
+#define KEY_FACTORY             176
 #define KEY_SCROLLUP		177
 #define KEY_SCROLLDOWN		178
 #define KEY_KPLEFTPAREN		179

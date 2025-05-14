@@ -19,14 +19,14 @@
 		io-channel-names = "buttons";
 		keyup-threshold-microvolt = <1800000>;
 		poll-interval = <100>;
-/*
+                status = "okay";
 		vol-up-key {
-			label = "volume up";
-			linux,code = <KEY_VOLUMEUP>;
-			press-threshold-microvolt = <1750>;
+			label = "factory";
+			linux,code = <KEY_FACTORY>;
+			press-threshold-microvolt = <43988>;
 		};
 
-		vol-down-key {
+/*		vol-down-key {
 			label = "volume down";
 			linux,code = <KEY_VOLUMEDOWN>;
 			press-threshold-microvolt = <297500>;
@@ -1258,7 +1258,7 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &hdmi_sound {
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c0 {
@@ -1904,7 +1904,7 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &spdif_8ch {
-    status = "okay";
+    status = "disabled";
 };
 
 &tsadc {
