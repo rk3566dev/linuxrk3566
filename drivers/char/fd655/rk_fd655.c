@@ -56,7 +56,7 @@ static int usb4g_power_pin = 0;
 static int usb4g_pwrkey_pin = 0;
 static int sata_pwr_en = 0;
 static FD655_DEV *pdata = NULL;
-static int show_time_flag =0;
+static int show_time_flag =1;
 unsigned char  val = 0x00;
 /** 
  * @brief   转换字符为数码管的显示码
