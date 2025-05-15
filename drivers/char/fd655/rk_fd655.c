@@ -57,7 +57,7 @@ static int usb4g_pwrkey_pin = 0;
 static int sata_pwr_en = 0;
 static FD655_DEV *pdata = NULL;
 static int show_time_flag =1;
-unsigned char  val = 0x00;
+unsigned char  val = 0x11;
 /** 
  * @brief   转换字符为数码管的显示码
  * @param   cTemp 待转换为显示码的字符
@@ -489,9 +489,13 @@ void fd655_bit6onoff(int a){
 
 void fd655_timedisplay_show(int a){
 	if(a==1){
+		 mutex_lock(&timeshow_mutex_lock);
 		show_time_flag=1;
+		 mutex_unlock(&timeshow_mutex_lock);
 	}else {
+		mutex_lock(&timeshow_mutex_lock);
 		show_time_flag=0;
+		mutex_unlock(&timeshow_mutex_lock);
 		FD655_Disp(DIG1,0x00,pdata);
 		FD655_Disp(DIG2,0x00,pdata);
 		FD655_Disp(DIG3,0x00,pdata);
@@ -723,16 +727,21 @@ static ssize_t  fd655_dev_write(struct file *filp, const char __user *buf,		size
 			    tmp[i] = Led_Get_Code(data[i]);
 				//	printk("Led_Get_Code buf: %x \r\n",tmp[i]);
 				}
+				data[4]=(data[4] & val);
+				mutex_lock(&showbit_mutex_lock);
 				if(show_time_flag==1){
+					mutex_unlock(&showbit_mutex_lock);
 				FD655_Disp(DIG1,tmp[0],dev);
 				FD655_Disp(DIG2,tmp[1],dev);
 				FD655_Disp(DIG3,tmp[2],dev);
 				FD655_Disp(DIG4,tmp[3],dev);
+				FD655_Disp(DIG5,data[4],dev);
 				}else{
 					FD655_Disp(DIG1,0x00,pdata);
 		            FD655_Disp(DIG2,0x00,pdata);
 		            FD655_Disp(DIG3,0x00,pdata);
 		            FD655_Disp(DIG4,0x00,pdata);
+					FD655_Disp(DIG5,data[4],dev);
 				}
 				
 			//	FD655_Disp(DIG5,data[4],dev);
