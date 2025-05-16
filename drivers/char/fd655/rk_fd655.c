@@ -721,16 +721,19 @@ static ssize_t  fd655_dev_write(struct file *filp, const char __user *buf,		size
 		{		
 			if (missing == 0)
 			{	
+		
+		        mutex_lock(&showbit_mutex_lock);
+				data[4]=(data[4] & val);
+				mutex_unlock(&showbit_mutex_lock);
 		     	for(i=0; i<count; i++)
 				{
 			//		tmp[i] = data[i];
 			    tmp[i] = Led_Get_Code(data[i]);
 				//	printk("Led_Get_Code buf: %x \r\n",tmp[i]);
 				}
-				data[4]=(data[4] & val);
-				mutex_lock(&showbit_mutex_lock);
+				mutex_lock(&timeshow_mutex_lock);
 				if(show_time_flag==1){
-					mutex_unlock(&showbit_mutex_lock);
+					
 				FD655_Disp(DIG1,tmp[0],dev);
 				FD655_Disp(DIG2,tmp[1],dev);
 				FD655_Disp(DIG3,tmp[2],dev);
@@ -743,7 +746,7 @@ static ssize_t  fd655_dev_write(struct file *filp, const char __user *buf,		size
 		            FD655_Disp(DIG4,0x00,pdata);
 					FD655_Disp(DIG5,data[4],dev);
 				}
-				
+				mutex_unlock(&timeshow_mutex_lock);
 			//	FD655_Disp(DIG5,data[4],dev);
 				status = count;
 			} 
