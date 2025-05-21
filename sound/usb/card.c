@@ -775,7 +775,7 @@ static int snd_usb_audio_create(struct usb_interface *intf,
 		return -ENXIO;
 	}
 
-	err = snd_card_new(&intf->dev, index[idx], id[idx], THIS_MODULE,
+	err = snd_card_new(&intf->dev, index[1], id[idx], THIS_MODULE,
 			   sizeof(*chip), &card);
 	if (err < 0) {
 		dev_err(&dev->dev, "cannot create card instance %d\n", idx);
