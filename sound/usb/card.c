@@ -761,7 +761,7 @@ static int snd_usb_audio_create(struct usb_interface *intf,
 	char component[14];
 
 	*rchip = NULL;
-
+        int fixed_index =1;
 	switch (snd_usb_get_speed(dev)) {
 	case USB_SPEED_LOW:
 	case USB_SPEED_FULL:
@@ -775,7 +775,7 @@ static int snd_usb_audio_create(struct usb_interface *intf,
 		return -ENXIO;
 	}
 
-	err = snd_card_new(&intf->dev, index[1], id[idx], THIS_MODULE,
+	err = snd_card_new(&intf->dev, fixed_index, id[idx], THIS_MODULE,
 			   sizeof(*chip), &card);
 	if (err < 0) {
 		dev_err(&dev->dev, "cannot create card instance %d\n", idx);
