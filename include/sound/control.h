@@ -142,9 +142,6 @@ int snd_ctl_unregister_ioctl_compat(snd_kctl_ioctl_func_t fcn);
 
 int snd_ctl_get_preferred_subdevice(struct snd_card *card, int type);
 
-static int snd_ctl_elem_write(struct snd_card *card, struct snd_ctl_file *file,
-                              struct snd_ctl_elem_value *control);
-
 static inline unsigned int snd_ctl_get_ioffnum(struct snd_kcontrol *kctl, struct snd_ctl_elem_id *id)
 {
 	unsigned int ioff = id->numid - kctl->id.numid;
