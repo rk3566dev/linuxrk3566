@@ -782,6 +782,14 @@ static int snd_usb_audio_create(struct usb_interface *intf,
 		return err;
 	}
 
+	struct snd_ctl_elem_id id = {0};
+	id.iface = SNDRV_CTL_ELEM_IFACE_MIXER;
+	strlcpy(id.name, "PCM Playback Volume", sizeof(id.name));
+	struct snd_ctl_elem_value control = {0};
+	control.value.integer.value[0] = 80;  // 左声道音量（0-100）
+	control.value.integer.value[1] = 80;
+	snd_ctl_elem_write(card, snd_ctl_find_id(card, &id), &control);
+
 	chip = card->private_data;
 	mutex_init(&chip->mutex);
 	mutex_init(&chip->dev_lock);
