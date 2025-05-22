@@ -551,7 +551,7 @@ vcc2v5_sys: vcc2v5-ddr {
 //};
 
 &sdmmc1 {
-    max-frequency = <150000000>;
+    max-frequency = <50000000>;
     supports-sdio;
     bus-width = <4>;
     disable-wp;
