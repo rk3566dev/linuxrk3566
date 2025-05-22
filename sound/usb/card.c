@@ -40,7 +40,7 @@
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <sound/initval.h>
-
+#include <sound/control.h>
 #include "usbaudio.h"
 #include "card.h"
 #include "midi.h"
