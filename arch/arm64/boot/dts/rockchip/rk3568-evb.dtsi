@@ -1249,6 +1249,15 @@ vcc5v0_host: vcc5v0-host {
 	status = "okay";
 };
 
+&npu_opp_table {
+        /delete-node/ opp-j-600000000;
+        /delete-node/ opp-m-900000000;
+};
+
+&dmc_opp_table {
+         /delete-node/ opp-j-m-1560000000;
+};
+
 &hdmi {
 	status = "okay";
 	rockchip,phy-table =
@@ -1702,21 +1711,21 @@ vcc5v0_host: vcc5v0-host {
 		};
 	};
 
-	usb {
-		vcc5v0_host_en: vcc5v0-host-en {
-			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-
+//	usb {
+//		vcc5v0_host_en: vcc5v0-host-en {
+//			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
+//		};
+/*
 		vcc5v0_otg_en: vcc5v0-otg-en {
 			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-	};
+	};*/
 
-	wireless-bluetooth {
+/*	wireless-bluetooth {
 		uart8_gpios: uart8-gpios {
 			rockchip,pins = <2 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-	};
+	};*/
 };
 
  /*

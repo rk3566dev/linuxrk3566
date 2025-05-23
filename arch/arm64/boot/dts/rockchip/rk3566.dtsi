@@ -14,6 +14,9 @@
 
 &cpu0_opp_table {
 	/delete-node/ opp-1992000000;
+	/delete-node/ opp-j-1008000000;
+        /delete-node/ opp-j-1416000000;
+        /delete-node/ opp-m-1608000000;
 };
 
 &lpddr4_params {
