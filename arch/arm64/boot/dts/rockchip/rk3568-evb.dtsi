@@ -427,6 +427,16 @@ vcc5v0_host: vcc5v0-host {
         vin-supply = <&vcc5v0_sys>;
     };
 
+   vcc_ddr:vcc-ddr{
+                compatible = "regulator-fixed";
+                regulator-always-on;
+                regulator-boot-on;
+                regulator-name = "vcc_ddr";
+                regulator-min-microvolt = <1100000>;
+                regulator-max-microvolt = <1100000>;
+                vin-supply = <&vcc5v0_sys>;
+        };
+
    /* vdd_gpu: vdd-gpu {
         compatible = "regulator-fixed";
         regulator-name = "vdd_gpu";
@@ -565,7 +575,8 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &dmc {
-	center-supply = <&vdd_fixed>;
+	auto-freq-en = <0>;
+	center-supply = <&vcc_ddr>;
 	status = "okay";
 };
 /*
