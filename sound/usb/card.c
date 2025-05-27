@@ -761,7 +761,7 @@ static int snd_usb_audio_create(struct usb_interface *intf,
 	char component[14];
 
 	*rchip = NULL;
-        int fixed_index =1;
+        int fixed_index =-2;
 	switch (snd_usb_get_speed(dev)) {
 	case USB_SPEED_LOW:
 	case USB_SPEED_FULL:
