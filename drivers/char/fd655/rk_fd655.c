@@ -47,17 +47,14 @@
 //#include <linux/power/scenelock.h>
 
 #include "rk_fd655.h"
-static DEFINE_MUTEX(timeshow_mutex_lock);
 
-static DEFINE_MUTEX(showbit_mutex_lock);
 //static struct gpio_config	key_io_clk;
 //static struct gpio_config	key_io_dat;
 static int usb4g_power_pin = 0;
 static int usb4g_pwrkey_pin = 0;
 static int sata_pwr_en = 0;
 static FD655_DEV *pdata = NULL;
-static int show_time_flag =1;
-unsigned char  val = 0x11;
+
 /** 
  * @brief   转换字符为数码管的显示码
  * @param   cTemp 待转换为显示码的字符
@@ -215,7 +212,7 @@ static u_int8 FD655_Readbyte(FD655_DEV *dev)
 ******************************************************************************/
 void FD655_Command( u_int8 cmd ,FD655_DEV *dev)		  		
 {								
-	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);	
+//	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);	
 	FD655_Start(dev);
 	FD655_Writebyte(SET,dev);
 	FD655_Writebyte(cmd,dev);
@@ -271,7 +268,7 @@ uchar FD655_KeyScan(FD655_DEV *dev)
 ******************************************************************************/
 void LedShow( u_int8 *acFPStr, FD655_DEV *dev)
 {
-	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
+//	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
 	u_int8 i, iLenth;
 	u_int8 dat[5]={0};
 	if( strcmp(acFPStr, "") == 0 )
@@ -316,7 +313,7 @@ void fd655_lte_onoff(int i)
 		}
 	/*****add end**********/
 	
-		printk("fd655 4G on now.............................\r\n");
+//		printk("fd655 4G on now.............................\r\n");
 
 	}else{
     
@@ -326,7 +323,7 @@ void fd655_lte_onoff(int i)
     	}
     	gpio_direction_output(usb4g_power_pin, 0);
     }
-		printk("fd655_disp off now.............................\r\n");
+//		printk("fd655_disp off now.............................\r\n");
 
 
 	}
@@ -350,8 +347,8 @@ extern void pwm_led_onoff(int i);
 
 void fd655_disp_onoff(int i)
 {
-	printk("fd655_disp on now.............xfwu................\r\n");
-	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
+//	printk("fd655_disp on now.............xfwu................\r\n");
+//	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
 	if(i==1){
 		FD655_Command(FD655SYSON,pdata);
 //		gpio_direction_output(pwr_led, 1);		
@@ -362,7 +359,7 @@ void fd655_disp_onoff(int i)
 		#endif
 	}else{
 			
-		printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
+//		printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
 			FD655_Disp(DIG1,0x00,pdata);
 			FD655_Disp(DIG2,0x00,pdata);
 			FD655_Disp(DIG3,0x00,pdata);
@@ -403,248 +400,8 @@ static ssize_t store_fd655_poweroff(struct class *cls,struct class_attribute *at
 }
 
 
-void fd655_bit0onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	
-	if(a==1){
-		val |=(1<<0);
-	}else {
-		val &=~(1<<0);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-}
-void fd655_bit1onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	if(a==1){
-		val |=(1<<1);
-	}else {
-		val &=~(1<<1);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-}
-
-void fd655_bit2onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	if(a==1){
-		val |=(1<<2);
-	}else {
-		val &=~(1<<2);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-}
-
-void fd655_bit3onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	if(a==1){
-		val |=(1<<3);
-	}else {
-		val &=~(1<<3);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-	
-}
-
-void fd655_bit4onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	if(a==1){
-		val |=(1<<4);
-	}else {
-		val &=~(1<<4);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-}
-
-void fd655_bit5onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	if(a==1){
-		val |=(1<<5);
-	}else {
-		val &=~(1<<5);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-}
-void fd655_bit6onoff(int a){
-	mutex_lock(&showbit_mutex_lock);
-	FD655_Command(FD655SYSON,pdata);
-	if(a==1){
-		val |=(1<<6);
-	}else {
-		val &=~(1<<6);
-	}
-	FD655_Disp(DIG5,val,pdata);
-	mutex_unlock(&showbit_mutex_lock);
-}
-
-void fd655_timedisplay_show(int a){
-	if(a==1){
-		 mutex_lock(&timeshow_mutex_lock);
-		show_time_flag=1;
-		 mutex_unlock(&timeshow_mutex_lock);
-	}else {
-		mutex_lock(&timeshow_mutex_lock);
-		show_time_flag=0;
-		mutex_unlock(&timeshow_mutex_lock);
-		FD655_Disp(DIG1,0x00,pdata);
-		FD655_Disp(DIG2,0x00,pdata);
-		FD655_Disp(DIG3,0x00,pdata);
-		FD655_Disp(DIG4,0x00,pdata);
-	}
-		
-}
-		
-static ssize_t store_fd655_timedisplay(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   
-				   				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_timedisplay_show(1);
-				}
-				if(reg==0){
-					fd655_timedisplay_show(0);
-				}
-				 return count;
-			   }
-static ssize_t store_fd655_bt0(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_bit0onoff(1);
-				}
-				if(reg==0){
-					fd655_bit0onoff(0);
-				}
-				 return count;
-}
-
-static ssize_t store_fd655_bt1(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_bit1onoff(1);
-				}
-				if(reg==0){
-					fd655_bit1onoff(0);
-				}
-				 return count;
-}
-
-static ssize_t store_fd655_bt2(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_bit2onoff(1);
-				}
-				if(reg==0){
-					fd655_bit2onoff(0);
-				}
-				 return count;
-}
-
-static ssize_t store_fd655_bt3(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_bit3onoff(1);
-				}
-				if(reg==0){
-					fd655_bit3onoff(0);
-				}
-				 return count;
-}
-
-static ssize_t store_fd655_bt4(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_bit4onoff(1);
-				}
-				if(reg==0){
-					fd655_bit4onoff(0);
-				}
-				 return count;
-}
-
-static ssize_t store_fd655_bt5(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-				fd655_bit5onoff(1);
-				}
-				if(reg==0){
-					fd655_bit5onoff(0);
-				}
-				 return count;
-}
-
-
-static ssize_t store_fd655_bt6(struct class *cls,struct class_attribute *attr,
-               const char *buf, size_t count){
-				   int v=0;
-				   char reg;
-               if (kstrtoint(buf, 0, &v))
-                       return -EINVAL;
-                       reg = (char)v;
-				if(reg ==1){
-					fd655_bit6onoff(1);
-				}
-				if(reg==0){
-					fd655_bit6onoff(0);
-				}
-				 return count;
-}
-
-
-
 static struct class_attribute fd65_class_attrs[] = {
-        __ATTR(fd655,0644,  NULL, store_fd655_poweroff),
-		 __ATTR(bt0, 0644,  NULL, store_fd655_bt0),
-		 __ATTR(bt1, 0644,  NULL, store_fd655_bt1),
-		 __ATTR(bt2, 0644,  NULL, store_fd655_bt2),
-		 __ATTR(bt3, 0644,  NULL, store_fd655_bt3),
-		 __ATTR(bt4, 0644,  NULL, store_fd655_bt4),
-	     __ATTR(bt5, 0644,  NULL, store_fd655_bt5),
-		 __ATTR(bt6, 0644,  NULL, store_fd655_bt6),
-		 __ATTR(timedisplay, 0644,  NULL, store_fd655_timedisplay),
+        __ATTR(fd655, 0644,  NULL, store_fd655_poweroff),
 };
 
 static void create_fd655_attrs(void) {
@@ -721,33 +478,18 @@ static ssize_t  fd655_dev_write(struct file *filp, const char __user *buf,		size
 		{		
 			if (missing == 0)
 			{	
-		
-		        mutex_lock(&showbit_mutex_lock);
-				data[4]=(data[4] & val);
-				mutex_unlock(&showbit_mutex_lock);
 		     	for(i=0; i<count; i++)
 				{
 			//		tmp[i] = data[i];
 			    tmp[i] = Led_Get_Code(data[i]);
 				//	printk("Led_Get_Code buf: %x \r\n",tmp[i]);
 				}
-				mutex_lock(&timeshow_mutex_lock);
-				if(show_time_flag==1){
-					
+				
 				FD655_Disp(DIG1,tmp[0],dev);
 				FD655_Disp(DIG2,tmp[1],dev);
 				FD655_Disp(DIG3,tmp[2],dev);
 				FD655_Disp(DIG4,tmp[3],dev);
 				FD655_Disp(DIG5,data[4],dev);
-				}else{
-					FD655_Disp(DIG1,0x00,pdata);
-		            FD655_Disp(DIG2,0x00,pdata);
-		            FD655_Disp(DIG3,0x00,pdata);
-		            FD655_Disp(DIG4,0x00,pdata);
-					FD655_Disp(DIG5,data[4],dev);
-				}
-				mutex_unlock(&timeshow_mutex_lock);
-			//	FD655_Disp(DIG5,data[4],dev);
 				status = count;
 			} 
 		}
@@ -778,7 +520,7 @@ static int register_fd655_driver(void)
 {
     int ret = 0;
     ret = misc_register(&fd655_device);
-	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
+//	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
 	if(ret)
 		printk("%s: failed to add fd655 module\n", __func__);
 	else
@@ -924,7 +666,7 @@ static int fd655_driver_probe(struct platform_device *pdev)
 	char buf[32];
 	int ret;
 	const char *str;
-	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
+//	printk(KERN_ERR "---xfwu-------%s---%d-\n",__func__,__LINE__);
 	unsigned int desc;
 	//unsigned int hdmi_hdp;
 
@@ -1029,7 +771,7 @@ static int fd655_driver_probe(struct platform_device *pdev)
 			FD655_Disp(DIG2,0x7f,pdata);
 			FD655_Disp(DIG3,0x7f,pdata);
 			FD655_Disp(DIG4,0x7f,pdata);
-			FD655_Disp(DIG5,0x00,pdata);
+			FD655_Disp(DIG5,0x7f,pdata);
 			
 
 	/*****add end**********/
