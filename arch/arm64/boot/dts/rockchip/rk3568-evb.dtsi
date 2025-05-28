@@ -176,7 +176,7 @@
 		simple-audio-card,format = "i2s";
 		simple-audio-card,mclk-fs = <128>;
 		simple-audio-card,name = "rockchip,hdmi";
-		status = "disabled";
+		status = "okay";
 
 		simple-audio-card,cpu {
 				sound-dai = <&i2s0_8ch>;
@@ -1278,7 +1278,7 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &hdmi_sound {
-	status = "disabled";
+	status = "okay";
 };
 
 &i2c0 {
@@ -1924,7 +1924,7 @@ vcc5v0_host: vcc5v0-host {
 };
 
 &spdif_8ch {
-    status = "disabled";
+    status = "okay";
 };
 
 &tsadc {
