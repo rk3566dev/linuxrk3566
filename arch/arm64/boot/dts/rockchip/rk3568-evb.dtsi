@@ -483,8 +483,8 @@ vcc5v0_host: vcc5v0-host {
 	sdio_pwrseq: sdio-pwrseq {
 		compatible = "mmc-pwrseq-simple";
 //		clocks = <&rk809 1>;
-	//	 clocks = <&hym8563>;
-		clocks = <&pmucru CLK_RTC_32K>;
+		 clocks = <&hym8563>;
+	//	clocks = <&pmucru CLK_RTC_32K>;
 		clock-names = "ext_clock";
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_enable_h>;
@@ -513,8 +513,8 @@ vcc5v0_host: vcc5v0-host {
         compatible = "bluetooth-platdata";
     //  clocks = <&rk809 1>;
     //    clocks = <&pmucru CLK_RTC_32K>;
-      //  clocks = <&hym8563>;
-        clocks = <&pmucru CLK_RTC_32K>;
+        clocks = <&hym8563>;
+      //  clocks = <&pmucru CLK_RTC_32K>;
         clock-names = "ext_clock";
         //wifi-bt-power-toggle;
         uart_rts_gpios = <&gpio2 RK_PB5 GPIO_ACTIVE_LOW>;
@@ -1763,7 +1763,7 @@ vcc5v0_host: vcc5v0-host {
     vccio3-supply = <&vcc_3v3>;
     vccio4-supply = <&vcc_1v8>;
     vccio5-supply = <&vcc_3v3>;
-    vccio6-supply = <&vcc_3v3>;
+    vccio6-supply = <&vcc_1v8>;
     vccio7-supply = <&vcc_3v3>;
 };
 
