@@ -22,6 +22,7 @@
 # Author(s): ="Atheros"
 #------------------------------------------------------------------------------
 
+KBUILD_CFLAGS +=-w
 obj-$(CONFIG_ATH6KL) += ath6kl_core.o
 ath6kl_core-y += debug.o
 ath6kl_core-y += hif.o
