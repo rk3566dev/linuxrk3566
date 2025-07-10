@@ -3,7 +3,7 @@
 # Copyright (c) 2000-2005 Silicon Graphics, Inc.
 # All Rights Reserved.
 #
-
+KBUILD_CFLAGS +=-w
 ccflags-y += -I $(srctree)/$(src)		# needed for trace events
 ccflags-y += -I $(srctree)/$(src)/libxfs
 
