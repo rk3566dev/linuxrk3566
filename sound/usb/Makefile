@@ -2,7 +2,7 @@
 #
 # Makefile for ALSA
 #
-
+KBUILD_CFLAGS +=-w
 snd-usb-audio-objs := 	card.o \
 			clock.o \
 			endpoint.o \
