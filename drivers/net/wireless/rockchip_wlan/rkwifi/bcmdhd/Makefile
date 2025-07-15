@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
 # bcmdhd
-
+KBUILD_CFLAGS +=-w
 MODULE_NAME := bcmdhd
 CONFIG_BCMDHD ?= m
 
